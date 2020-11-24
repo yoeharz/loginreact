@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const qs = require('querystring')
 const api = 'http://localhost:3001'
 
-export default function LoginComp() {
+export default function LoginComp(props) {
     const { dataGlobal, dispatch } = useContext(AuthContext)
 
     const initialState = {
@@ -51,6 +51,9 @@ export default function LoginComp() {
                     ...dataGlobal,
                     isAuthenticated: true
                 })
+
+                //redirect ke dashboard
+                props.history.push("/dashboard")
 
             } else {
                 setData({

@@ -1,9 +1,11 @@
 import React,{useReducer, createContext} from 'react';
-import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import HomeComp from './component/HomeComp';
 import LoginComp from './component/LoginComp';
 import MenuComp from './component/MenuComp';
+import Publik from './component/Publik';
 import RegisterComp from './component/RegisterComp';
+import Transaksi from './component/Transaksi';
 
 //context
 export const AuthContext = createContext()
@@ -50,15 +52,10 @@ function App() {
       }}>
 
         <MenuComp/>
-        {
-        !state.isAuthenticated ? 
-        <Redirect to={{pathname:"/"}}/> 
-        : 
-        <Redirect to={{pathname:"/homepage"}}/>
-        }
-
-        <Route exact path="/" component={LoginComp} />
-        <Route exact path="/homepage" component={HomeComp} />
+        <Route exact path="/" component={Publik} />
+        <Route exact path="/login" component={LoginComp} />
+        <Route exact path="/dashboard" component={HomeComp} />
+        <Route exact path="/transaksi" component={Transaksi} />
         <Route exact path="/register" component={RegisterComp} />
       </AuthContext.Provider>
     </Switch>
