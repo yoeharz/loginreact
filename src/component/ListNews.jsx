@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { Container, Table } from 'reactstrap'
 import axios from 'axios';
 import { AuthContext } from '../App';
+import { Redirect } from 'react-router-dom';
 
 const api = 'http://localhost:3001'
 
@@ -20,7 +21,19 @@ export default function ListNews() {
 
         axios.get(api + '/auth/api/v1/news', config).then(res=>{
             setNews(res.data.values)
+        }).catch(e => {
+            console.log(e)
         })
+    }
+
+    useEffect(() => {
+        fetchData()
+        //eslint-disable-next-line
+    },[])
+
+    // melakukan cek otentikasi
+    if (!state.isAuthenticated) {
+        return <Redirect to="/login" />
     }
 
     return (

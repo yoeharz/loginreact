@@ -1,6 +1,7 @@
 import React,{useReducer, createContext} from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import HomeComp from './component/HomeComp';
+import ListNews from './component/ListNews';
 import LoginComp from './component/LoginComp';
 import MenuComp from './component/MenuComp';
 import Publik from './component/Publik';
@@ -57,6 +58,7 @@ function App() {
         <Route exact path="/dashboard" component={HomeComp} />
         <Route exact path="/transaksi" component={Transaksi} />
         <Route exact path="/register" component={RegisterComp} />
+        <Route exact path="/news" component={ListNews} />
       </AuthContext.Provider>
     </Switch>
     </BrowserRouter>

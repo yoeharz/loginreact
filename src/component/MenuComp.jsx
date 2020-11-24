@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import {
   Collapse,
   Navbar,
@@ -54,13 +54,20 @@ export default function MenuComp() {
             <NavItem>
               <NavLink to="/transaksi" className="nav-link">TRANSAKSI</NavLink>
             </NavItem>
+            <NavItem>
+              <NavLink to="/news" className="nav-link">NEWS</NavLink>
+            </NavItem>
 
           </Nav>
           <NavbarText>
-            <Button color="success" onClick={() =>
+            <Button color="success" onClick={() =>{
               dispatch({
                 type: "LOGOUT"
               })
+
+              return <Redirect to="/login" />
+            }
+              
             }>
               LOGOUT
             </Button>
