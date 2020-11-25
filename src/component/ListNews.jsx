@@ -9,7 +9,7 @@ const api = 'http://localhost:3001'
 export default function ListNews() {
 
     const [news, setNews] = useState([])
-    const { state } = useContext(AuthContext)
+    const { state, dispatch } = useContext(AuthContext)
 
     const fetchData = () =>{
         var config ={
@@ -26,8 +26,19 @@ export default function ListNews() {
         })
     }
 
+    const timeout = () => {
+        setTimeout(() => {
+            console.log("Token berakhir")
+            dispatch({
+                type: "LOGOUT"
+              })
+        }, state.tokenExpires);
+    }
+
     useEffect(() => {
         fetchData()
+        //eslint-disable-next-line
+        timeout()
         //eslint-disable-next-line
     },[])
 
