@@ -6,6 +6,9 @@ import LoginComp from './component/LoginComp';
 import MenuComp from './component/MenuComp';
 import Publik from './component/Publik';
 import RegisterComp from './component/RegisterComp';
+import RoleAdmin from './component/RoleAkses/RoleAdmin';
+import RoleMember from './component/RoleAkses/RoleMember';
+import RoleStaff from './component/RoleAkses/RoleStaff';
 import Transaksi from './component/Transaksi';
 
 //context
@@ -16,7 +19,8 @@ const initialState = {
   isAuthenticated: false,
   user: null,
   token: null,
-  tokenExpires: 0
+  tokenExpires: 0, 
+  role: 0
 }
 
 const reducer = (state, action) => {
@@ -29,7 +33,8 @@ const reducer = (state, action) => {
       isAuthenticated:true,
       user: action.payload.user,
       token: action.payload.token,
-      tokenExpires: action.payload.expires
+      tokenExpires: action.payload.expires,
+      role: action.payload.role
     }
 
     case "LOGOUT":
@@ -61,6 +66,9 @@ function App() {
         <Route exact path="/transaksi" component={Transaksi} />
         <Route exact path="/register" component={RegisterComp} />
         <Route exact path="/news" component={ListNews} />
+        <Route exact path="/admin" component={RoleAdmin} />
+        <Route exact path="/staff" component={RoleStaff} />
+        <Route exact path="/member" component={RoleMember} />
       </AuthContext.Provider>
     </Switch>
     </BrowserRouter>
