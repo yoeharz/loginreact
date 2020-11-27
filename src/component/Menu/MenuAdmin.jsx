@@ -15,7 +15,7 @@ import { AuthContext } from '../../App';
 export default function MenuAdmin() {
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
-    const { state, dispatch } = useContext(AuthContext)
+    const { dispatch } = useContext(AuthContext)
 
     return (
         <div>
