@@ -1,79 +1,31 @@
-import React, { useContext, useState } from 'react'
-import { NavLink, Redirect } from 'react-router-dom';
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavbarText,
-  Button
-} from 'reactstrap';
+import React, { useContext } from 'react'
+
 import { AuthContext } from '../App';
+import MenuAdmin from './Menu/MenuAdmin';
+import MenuMember from './Menu/MenuMember';
+import MenuPublik from './Menu/MenuPublik';
+import MenuStaff from './Menu/MenuStaff';
 
 
 export default function MenuComp() {
 
-  const [isOpen, setIsOpen] = useState(false);
-  const toggle = () => setIsOpen(!isOpen);
+  
 
-  const { state, dispatch } = useContext(AuthContext)
+  const { state } = useContext(AuthContext)
 
   if (!state.isAuthenticated) {
     return (
-      <div>
-        <Navbar className="navbar-dark bg-dark" light expand="md">
-          <NavbarBrand href="/">reactstrap</NavbarBrand>
-          <NavbarToggler onClick={toggle} />
-          <Collapse isOpen={isOpen} navbar>
-            <Nav className="mr-auto" navbar>
-              <NavItem>
-
-              </NavItem>
-
-            </Nav>
-            <NavbarText>
-              <NavLink to="/login">LOGIN</NavLink>
-            </NavbarText>
-          </Collapse>
-        </Navbar>
-      </div>
+      <MenuPublik/>
     )
   }
+
+  if(state.role === 1){
+    return <MenuAdmin/>
+  }else if(state.role === 2){
+    return <MenuStaff/>
+  }
+
   return (
-    <div>
-      <Navbar className="navbar-dark bg-dark" light expand="md">
-        <NavbarBrand href="/">reactstrap</NavbarBrand>
-        <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar>
-          <Nav className="mr-auto" navbar>
-            <NavItem>
-              <NavLink to="/dashboard" className="nav-link">HOME</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink to="/transaksi" className="nav-link">TRANSAKSI</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink to="/news" className="nav-link">NEWS</NavLink>
-            </NavItem>
-
-          </Nav>
-          <NavbarText>
-            <Button color="success" onClick={() =>{
-              dispatch({
-                type: "LOGOUT"
-              })
-
-              return <Redirect to="/login" />
-            }
-              
-            }>
-              LOGOUT
-            </Button>
-          </NavbarText>
-        </Collapse>
-      </Navbar>
-    </div>
+    <MenuMember/>
   )
 }
