@@ -66,7 +66,7 @@ export default function LoginComp(props) {
             }
     
             axios.post(api + '/auth/api/v1/login', qs.stringify(requestBody), config).then(res => {
-                if (res.data.success === true) {
+                if (res.data.success === true && res.data.isVerified === 1) {
                     dispatch({
                         type: 'LOGIN',
                         payload: res.data,
@@ -77,6 +77,12 @@ export default function LoginComp(props) {
                     //redirect ke dashboard
                     props.history.push("/dashboard")
     
+                } else if (res.data.success === true && res.data.isVerified === 0){
+                    setData({
+                        ...data,
+                        isSubmitting: false, 
+                        errorMessage: "Email anda belum terverifikasi dan silahkan cek email."
+                    })
                 } else {
                     setData({
                         ...data,

@@ -1,5 +1,5 @@
-import React, { useContext, useState } from 'react'
-import { NavLink, Redirect } from 'react-router-dom';
+import React, { useState } from 'react'
+import { NavLink } from 'react-router-dom';
 import {
   Collapse,
   Navbar,
@@ -7,8 +7,7 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavbarText,
-  Button
+  NavbarText
 } from 'reactstrap';
 
 export default function MenuPublik() {
