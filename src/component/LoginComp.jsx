@@ -13,15 +13,19 @@ export default function LoginComp(props) {
     const { dataGlobal, dispatch } = useContext(AuthContext)
 
     const initialState = {
-        username: "",
-        password: "",
         isSubmitting: false,
         errorMessage: null,
         isVerified: false
     }
 
-    const [data, setData] = useState(initialState)
+    const stateForn = {
+        username: "",
+        password: ""
+    }
 
+    const [data, setData] = useState(initialState)
+    const [dataForm, setDataForm] = useState(stateForn)
+    
     // specifying your onload callback function
     var callback = function () {
         console.log('Done!!!!');
@@ -39,8 +43,8 @@ export default function LoginComp(props) {
     };
 
     const handleInputChange = event => {
-        setData({
-            ...data,
+        setDataForm({
+            ...dataForm,
             [event.target.name]: event.target.value
         })
     }
@@ -55,8 +59,8 @@ export default function LoginComp(props) {
             })
     
             const requestBody = {
-                username: data.username,
-                password: data.password
+                username: dataForm.username,
+                password: dataForm.password
             }
     
             const config = {
@@ -113,11 +117,11 @@ export default function LoginComp(props) {
                         <Form onSubmit={handleFormSubmit} >
                             <FormGroup>
                                 <Label for="exampleEmail">Username</Label>
-                                <Input type="text" name="username" id="exampleEmail" placeholder="with a placeholder" value={data.username} onChange={handleInputChange} />
+                                <Input type="text" name="username" id="exampleEmail" placeholder="with a placeholder" value={dataForm.username} onChange={handleInputChange} />
                             </FormGroup>
                             <FormGroup>
                                 <Label for="examplePassword">Password</Label>
-                                <Input type="password" name="password" id="examplePassword" placeholder="password placeholder" value={data.password} onChange={handleInputChange} />
+                                <Input type="password" name="password" id="examplePassword" placeholder="password placeholder" value={dataForm.password} onChange={handleInputChange} />
                             </FormGroup>
 
                             <Recaptcha  
